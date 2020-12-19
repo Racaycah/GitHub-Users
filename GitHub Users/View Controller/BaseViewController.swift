@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  BaseViewController.swift
 //  GitHub Users
 //
 //  Created by Ata Doruk on 13.12.2020.
 //
 
 import UIKit
+import Network
 
-class ViewController: UIViewController {
+class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

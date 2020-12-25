@@ -62,7 +62,12 @@ class NetworkManager {
                 }
                 
                 do {
-                    let object = try JSONDecoder().decode(T.self, from: data)
+                    let decoder = JSONDecoder()
+                    DispatchQueue.main.sync {
+                        decoder.userInfo[CodingUserInfoKey.managedObjectContext!] = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+                    }
+                    
+                    let object = try decoder.decode(T.self, from: data)
                     completion(.success(object))
                 } catch let error {
                     completion(.failure(.generic(error)))

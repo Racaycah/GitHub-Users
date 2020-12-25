@@ -36,7 +36,7 @@ extension UserCollectionViewCell: BaseCell {
     func configureCell(with model: User, invertImage: Bool) {
         usernameLabel.text = model.name
         
-        ImageCache.shared.fetch(from: model.avatarUrl, completion: { [weak self] (image) in
+        ImageCache.shared.fetch(from: model.avatarUrl!, completion: { [weak self] (image) in
             guard let self = self else { return }
             guard let image = image else { return }
             if !invertImage { self.avatarImageView.image = image } else {

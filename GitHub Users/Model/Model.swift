@@ -14,3 +14,7 @@ protocol BaseModel {
 protocol DataModel: class {
     associatedtype model = BaseModel
 }
+
+struct DummyUser: Decodable {
+    let login: String
+}

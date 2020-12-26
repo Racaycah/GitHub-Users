@@ -21,7 +21,6 @@ class UsersViewModel: BaseCellViewModel {
     var users: [User] = [] {
         didSet {
             delegate?.reloadData()
-            save(users: users)
         }
     }
     
@@ -54,6 +53,7 @@ class UsersViewModel: BaseCellViewModel {
     
     func getUsers() {
         do {
+            // Check if we're calling the function for the first time
             if users.isEmpty {
                 let usersFetchRequest = User.createFetchRequest()
                 usersFetchRequest.sortDescriptors = [.init(key: "id", ascending: true)]
@@ -63,17 +63,27 @@ class UsersViewModel: BaseCellViewModel {
             
             NetworkManager.shared.request(.users(page: users.isEmpty ? 0 : Int(users.last!.id)), decodingTo: [User].self) { [weak self] (result) in
                 guard let self = self else { return }
-                
                 switch result {
                 case .success(let fetchedUsers):
                     self.users.isEmpty ? self.users = fetchedUsers : self.users.append(contentsOf: fetchedUsers)
-                    self.save(users: self.users)
+                    self.save(users: fetchedUsers)
                 case .failure: break
                 }
             }
-            
         } catch let error {
             print(error.localizedDescription)
+        }
+    }
+    
+    func deleteAllUsers() {
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "User")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        
+        do {
+            try usersContext.execute(deleteRequest)
+            try usersContext.save()
+        } catch let error {
+            print(error)
         }
     }
     

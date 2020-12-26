@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yDi-Gk-Pcq">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -19,10 +19,84 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="xP2-Ws-Pdy"/>
+                    <connections>
+                        <segue destination="Vzv-Xj-Djr" kind="show" identifier="userDetailSegue" id="Ps2-tM-75G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="99"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="98.4375"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="dlZ-Ds-kXV">
+            <objects>
+                <viewController id="Vzv-Xj-Djr" customClass="ProfileViewController" customModule="GitHub_Users" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ry1-tp-q8W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Psv-Be-zO8">
+                                <rect key="frame" x="10" y="98" width="394" height="148"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Psv-Be-zO8" secondAttribute="height" multiplier="16:6" id="xYq-Hg-tsV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHN-Tk-KFz">
+                                <rect key="frame" x="30" y="254" width="157" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtN-9d-lKQ">
+                                <rect key="frame" x="227" y="254" width="157" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vyj-C0-SrM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DHN-Tk-KFz" firstAttribute="top" secondItem="Psv-Be-zO8" secondAttribute="bottom" constant="8" symbolic="YES" id="05W-dq-l5A"/>
+                            <constraint firstItem="Psv-Be-zO8" firstAttribute="top" secondItem="vyj-C0-SrM" secondAttribute="top" constant="10" id="2Hc-oi-oM2"/>
+                            <constraint firstItem="vyj-C0-SrM" firstAttribute="trailing" secondItem="AtN-9d-lKQ" secondAttribute="trailing" constant="30" id="8IP-T4-L2s"/>
+                            <constraint firstItem="AtN-9d-lKQ" firstAttribute="leading" secondItem="vyj-C0-SrM" secondAttribute="centerX" constant="20" id="8st-6f-6GL"/>
+                            <constraint firstItem="DHN-Tk-KFz" firstAttribute="leading" secondItem="vyj-C0-SrM" secondAttribute="leading" constant="30" id="CZ1-ac-FH7"/>
+                            <constraint firstItem="AtN-9d-lKQ" firstAttribute="top" secondItem="Psv-Be-zO8" secondAttribute="bottom" constant="8" symbolic="YES" id="UCU-RO-sOC"/>
+                            <constraint firstItem="Psv-Be-zO8" firstAttribute="leading" secondItem="vyj-C0-SrM" secondAttribute="leading" constant="10" id="ofs-Ie-uab"/>
+                            <constraint firstItem="DHN-Tk-KFz" firstAttribute="trailing" secondItem="vyj-C0-SrM" secondAttribute="centerX" constant="-20" id="r1S-0g-toa"/>
+                            <constraint firstItem="vyj-C0-SrM" firstAttribute="trailing" secondItem="Psv-Be-zO8" secondAttribute="trailing" constant="10" id="uog-Q2-0yG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WuA-z9-CYd"/>
+                    <connections>
+                        <outlet property="followersLabel" destination="DHN-Tk-KFz" id="tnS-Mu-AUU"/>
+                        <outlet property="followingLabel" destination="AtN-9d-lKQ" id="YKg-to-pMV"/>
+                        <outlet property="userAvatarImageView" destination="Psv-Be-zO8" id="JMJ-Zg-mZe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1vW-OZ-ZZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="98"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cAs-qO-vdY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yDi-Gk-Pcq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fPs-7H-B9d">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="nnv-Q2-cMq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K36-3K-uf0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="98.4375"/>
         </scene>
     </scenes>
     <resources>

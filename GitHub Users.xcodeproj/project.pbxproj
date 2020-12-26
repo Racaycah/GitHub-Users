@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74316E20259769B500E341A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E1F259769B500E341A3 /* ProfileViewController.swift */; };
+		74316E252597896300E341A3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E242597896300E341A3 /* ProfileViewModel.swift */; };
 		743F713F25862D0700D3BEE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F713E25862D0700D3BEE2 /* AppDelegate.swift */; };
 		743F714125862D0700D3BEE2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714025862D0700D3BEE2 /* SceneDelegate.swift */; };
 		743F714325862D0700D3BEE2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714225862D0700D3BEE2 /* BaseViewController.swift */; };
@@ -27,8 +29,8 @@
 		744368B9258E8C0C0067C077 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368B7258E8C0C0067C077 /* LoadingCollectionViewCell.swift */; };
 		744368BA258E8C0C0067C077 /* LoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744368B8258E8C0C0067C077 /* LoadingCollectionViewCell.xib */; };
 		746BE7E8258633F300326FF8 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746BE7E7258633F300326FF8 /* UsersListViewController.swift */; };
-		74CF50DB2596526D00637874 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* User.swift */; };
-		74CF50DC2596526D00637874 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* User.swift */; };
+		74CF50DB2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */; };
+		74CF50DC2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */; };
 		74CF50EB259654AD00637874 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50E9259654AD00637874 /* User+CoreDataClass.swift */; };
 		74CF50EC259654AD00637874 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50E9259654AD00637874 /* User+CoreDataClass.swift */; };
 		74CF510A25966C9900637874 /* GitHub_Users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 743F714725862D0700D3BEE2 /* GitHub_Users.xcdatamodeld */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		74316E1F259769B500E341A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		74316E242597896300E341A3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		743F713B25862D0700D3BEE2 /* GitHub Users.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Users.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		743F713E25862D0700D3BEE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		743F714025862D0700D3BEE2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +85,7 @@
 		744368B7258E8C0C0067C077 /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		744368B8258E8C0C0067C077 /* LoadingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCollectionViewCell.xib; sourceTree = "<group>"; };
 		746BE7E7258633F300326FF8 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
-		74CF50DA2596526D00637874 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+ManagedObjectContext.swift"; sourceTree = "<group>"; };
 		74CF50E9259654AD00637874 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "GitHub Users/Model/User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		74CF510F25966DCB00637874 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				7443689D258E4B400067C077 /* Model.swift */,
-				74CF50DA2596526D00637874 /* User.swift */,
+				74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +207,7 @@
 			children = (
 				74436884258E40650067C077 /* UsersViewModel.swift */,
 				744368AC258E52860067C077 /* BaseCellViewModel.swift */,
+				74316E242597896300E341A3 /* ProfileViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				743F714225862D0700D3BEE2 /* BaseViewController.swift */,
 				746BE7E7258633F300326FF8 /* UsersListViewController.swift */,
+				74316E1F259769B500E341A3 /* ProfileViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -376,11 +382,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				743F714325862D0700D3BEE2 /* BaseViewController.swift in Sources */,
+				74316E252597896300E341A3 /* ProfileViewModel.swift in Sources */,
 				746BE7E8258633F300326FF8 /* UsersListViewController.swift in Sources */,
 				744368A8258E4F9C0067C077 /* BaseCell.swift in Sources */,
-				74CF50DB2596526D00637874 /* User.swift in Sources */,
+				74CF50DB2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
 				743F717F25862D9200D3BEE2 /* NetworkManager.swift in Sources */,
 				74CF510A25966C9900637874 /* GitHub_Users.xcdatamodeld in Sources */,
+				74316E20259769B500E341A3 /* ProfileViewController.swift in Sources */,
 				74CF50EB259654AD00637874 /* User+CoreDataClass.swift in Sources */,
 				744368AD258E52860067C077 /* BaseCellViewModel.swift in Sources */,
 				74CF511225966DCB00637874 /* User+CoreDataProperties.swift in Sources */,
@@ -400,7 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				743F715925862D0A00D3BEE2 /* GitHub_UsersTests.swift in Sources */,
-				74CF50DC2596526D00637874 /* User.swift in Sources */,
+				74CF50DC2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
 				74CF511325966DCB00637874 /* User+CoreDataProperties.swift in Sources */,
 				74CF50EC259654AD00637874 /* User+CoreDataClass.swift in Sources */,
 			);

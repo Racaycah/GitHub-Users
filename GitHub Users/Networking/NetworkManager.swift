@@ -10,6 +10,8 @@ import UIKit
 enum RequestType {
     case users(page: Int)
     case user(username: String)
+    case followers(user: String)
+    case following(user: String)
     
     private var baseUrl: String { "https://api.github.com/" }
     
@@ -17,6 +19,8 @@ enum RequestType {
         switch self {
         case .users(let page): return "users?since=\(page)"
         case .user(username: let username): return "users/\(username)"
+        case .followers(user: let username): return "users/\(username)/followers"
+        case .following(user: let username): return "users/\(username)/following"
         }
     }
     
@@ -68,9 +72,14 @@ class NetworkManager {
                     }
                     
                     let object = try decoder.decode(T.self, from: data)
-                    completion(.success(object))
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(object))
+                    }
                 } catch let error {
-                    completion(.failure(.generic(error)))
+                    DispatchQueue.main.async {
+                        completion(.failure(.generic(error)))
+                    }
                 }
             }.resume()
         }

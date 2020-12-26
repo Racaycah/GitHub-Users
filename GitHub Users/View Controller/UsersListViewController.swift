@@ -9,6 +9,8 @@ import UIKit
 
 class UsersListViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var usersCollectionView: UICollectionView!
     let collectionViewFlowLayout: UICollectionViewFlowLayout =  {
         let layout = UICollectionViewFlowLayout()
@@ -20,6 +22,10 @@ class UsersListViewController: UIViewController {
     }()
     
     let usersViewModel = UsersViewModel()
+    
+    private let segueIdentifier = "userDetailSegue"
+    
+    // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +50,19 @@ class UsersListViewController: UIViewController {
         
         usersViewModel.delegate = self
         
+//        usersViewModel.deleteAllUsers()
         usersViewModel.getUsers()
     }
+    
+    // MARK: - Segue Handling
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == segueIdentifier, let profileVC = segue.destination as? ProfileViewController, let user = sender as? User else { return }
+        profileVC.profileViewModel = ProfileViewModel(user: user)
+    }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension UsersListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -60,7 +76,14 @@ extension UsersListViewController: UICollectionViewDelegateFlowLayout {
             usersViewModel.getUsers()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let user = usersViewModel.users[indexPath.item]
+        performSegue(withIdentifier: segueIdentifier, sender: user)
+    }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension UsersListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -72,6 +95,8 @@ extension UsersListViewController: UICollectionViewDataSource {
     }
     
 }
+
+// MARK: - UsersViewModelDelegate
 
 extension UsersListViewController: UsersViewModelDelegate {
     func reloadData() {

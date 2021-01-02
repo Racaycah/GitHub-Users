@@ -60,6 +60,11 @@ class NetworkManager {
                 
         requestsQueue.async(flags: .barrier) { [self] in
             urlSession.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    completion(.failure(.generic(error!)))
+                    return
+                }
+                
                 guard let data = data else {
                     completion(.failure(.dataNil))
                     return

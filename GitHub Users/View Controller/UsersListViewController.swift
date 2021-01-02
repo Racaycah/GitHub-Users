@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Network
 
-class UsersListViewController: UIViewController {
+class UsersListViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -20,7 +21,9 @@ class UsersListViewController: UIViewController {
         layout.scrollDirection = .vertical
         return layout
     }()
+    weak var noNetworkViewBottomConstraint: NSLayoutConstraint?
     
+    let searchController = UISearchController(searchResultsController: nil)
     let usersViewModel = UsersViewModel()
     
     private let segueIdentifier = "userDetailSegue"
@@ -29,6 +32,8 @@ class UsersListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // UICollectionView and Layout
         
         usersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         usersCollectionView.collectionViewLayout = collectionViewFlowLayout
@@ -48,17 +53,32 @@ class UsersListViewController: UIViewController {
         usersCollectionView.register(UINib(nibName: UserCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: UserCollectionViewCell.reuseIdentifier)
         usersCollectionView.register(UINib(nibName: LoadingCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier)
         
-        usersViewModel.delegate = self
+        // Place a delete button to remove users when needed
         
-//        usersViewModel.deleteAllUsers()
-        usersViewModel.getUsers()
+        let deleteButton = UIBarButtonItem(title: "Delete Saved Users", style: .done, target: self, action: #selector(deleteAllUsers))
+        navigationItem.setRightBarButton(deleteButton, animated: false)
+        
+        usersViewModel.delegate = self
+//        usersViewModel.getUsers()
+        usersViewModel.loadSavedUsers()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for username or note..."
+        navigationItem.searchController = searchController
+    }
+    
+    @objc
+    func deleteAllUsers() {
+        usersViewModel.deleteAllUsers()
     }
     
     // MARK: - Segue Handling
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == segueIdentifier, let profileVC = segue.destination as? ProfileViewController, let user = sender as? User else { return }
-        profileVC.profileViewModel = ProfileViewModel(user: user)
+        guard segue.identifier == segueIdentifier, let profileVC = segue.destination as? ProfileViewController, let data = sender as? [Any], let user = data[0] as? User, let index = data[1] as? IndexPath else { return }
+        profileVC.profileViewModel = ProfileViewModel(user: user, index: index)
+        profileVC.profileViewModel.editDelegate = self
     }
 }
 
@@ -70,16 +90,17 @@ extension UsersListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard !searchController.isActive else { return }
         guard usersViewModel.users.count != 0 else { return }
         
-        if indexPath.item == usersViewModel.users.count {
+        if indexPath.item == usersViewModel.users.count && indexPath.item != 0 {
             usersViewModel.getUsers()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let user = usersViewModel.users[indexPath.item]
-        performSegue(withIdentifier: segueIdentifier, sender: user)
+        let user = searchController.isActive ? usersViewModel.filteredUsers[indexPath.item] : usersViewModel.users[indexPath.item]
+        performSegue(withIdentifier: segueIdentifier, sender: [user, indexPath])
     }
 }
 
@@ -87,11 +108,11 @@ extension UsersListViewController: UICollectionViewDelegateFlowLayout {
 
 extension UsersListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        usersViewModel.users.count + 1
+        searchController.isActive ? usersViewModel.filteredUsers.count : usersViewModel.users.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        indexPath.item == usersViewModel.users.count ? usersViewModel.getLoadingCell(from: collectionView, indexPath: indexPath) : usersViewModel.getCell(from: collectionView, indexPath: indexPath)
+        searchController.isActive ? usersViewModel.getCell(from: collectionView, indexPath: indexPath) : indexPath.item == usersViewModel.users.count ? usersViewModel.getLoadingCell(from: collectionView, indexPath: indexPath) : usersViewModel.getCell(from: collectionView, indexPath: indexPath)
     }
     
 }
@@ -103,5 +124,29 @@ extension UsersListViewController: UsersViewModelDelegate {
         DispatchQueue.main.async {
             self.usersCollectionView.reloadData()
         }
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension UsersListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        usersViewModel.searchText = text
+        usersCollectionView.reloadData()
+    }
+}
+
+// MARK: - EditUserDelegate
+
+extension UsersListViewController: EditUserDelegate {
+    func noteSaved(forUser user: User, inIndex index: IndexPath) {
+        if searchController.isActive {
+            usersViewModel.filteredUsers[index.item] = user
+        } else {
+            usersViewModel.users[index.item] = user
+        }
+        
+        usersCollectionView.reloadItems(at: [index])
     }
 }

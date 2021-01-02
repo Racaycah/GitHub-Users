@@ -16,6 +16,11 @@ public class User: NSManagedObject, BaseModel, Decodable {
         case name = "login"
         case avatarUrl = "avatar_url"
         case id
+        case fullName = "name"
+        case company
+        case blog
+        case image
+        case note
     }
     
     public required convenience init(from decoder: Decoder) throws {
@@ -29,5 +34,10 @@ public class User: NSManagedObject, BaseModel, Decodable {
         self.id = try container.decode(Int64.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.avatarUrl = try container.decode(String.self, forKey: .avatarUrl)
+        self.fullName = try container.decodeIfPresent(String.self, forKey: .fullName)
+        self.company = try container.decodeIfPresent(String.self, forKey: .company)
+        self.blog = try container.decodeIfPresent(String.self, forKey: .blog)
+        self.image = try container.decodeIfPresent(Data.self, forKey: .image)
+        self.note = try container.decodeIfPresent(String.self, forKey: .note)
     }
 }

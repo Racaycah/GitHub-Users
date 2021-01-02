@@ -8,10 +8,22 @@
 import UIKit
 import CoreData
 
+var usersContext: NSManagedObjectContext = {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    let managedContext = appDelegate.persistentContainer.viewContext
+    return managedContext
+}()
+
+var saveContext: NSManagedObjectContext = {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    let saveContext = appDelegate.persistentContainer.newBackgroundContext()
+    return saveContext
+}()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

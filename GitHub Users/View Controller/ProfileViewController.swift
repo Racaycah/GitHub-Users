@@ -12,14 +12,48 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var infoContainerView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var blogLabel: UILabel!
+    @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var saveButton: UIButton!
+    
+    weak var userDelegate: UsersViewModelDelegate?
     
     var profileViewModel: ProfileViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        infoContainerView.layer.cornerRadius = 5
+        infoContainerView.layer.borderWidth = 2
+        infoContainerView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        
+        noteTextView.layer.cornerRadius = 5
+        noteTextView.layer.borderWidth = 2
+        noteTextView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        
+        saveButton.layer.cornerRadius = 5
+        saveButton.layer.borderWidth = 2
+        saveButton.layer.borderColor = UIColor.systemBlue.cgColor
+        saveButton.titleLabel?.sizeToFit()
+        
+        noteTextView.delegate = self
+        noteTextView.text = profileViewModel.user.note
+        
         profileViewModel.delegate = self
         profileViewModel.getUserDetails()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    @IBAction func saveTapped(_ sender: UIButton) {
+        view.endEditing(true)
+        
+        profileViewModel.saveNote(noteTextView.text)
     }
 }
 
@@ -46,11 +80,22 @@ extension ProfileViewController: ProfileViewModelDelegate {
                 print(error.localizedDescription)
             }
         }
+        
+        nameLabel.text = "Name: \(user.fullName!)"
+        let companies = user.company?.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "@", with: "").components(separatedBy: " ").first?.capitalized
+        companyLabel.text = "Company: \(companies ?? "")"
+        blogLabel.text = "Blog: \(user.blog ?? "")"
     }
     
     func errorOccurred(_ error: Error) {
         
     }
     
+    
+}
+
+// MARK: - UITextViewDelegate
+
+extension ProfileViewController: UITextViewDelegate {
     
 }

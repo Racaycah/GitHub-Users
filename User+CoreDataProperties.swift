@@ -19,7 +19,11 @@ extension User {
     @NSManaged public var avatarUrl: String?
     @NSManaged public var id: Int64
     @NSManaged public var name: String?
-
+    @NSManaged public var fullName: String?
+    @NSManaged public var company: String?
+    @NSManaged public var blog: String?
+    @NSManaged public var image: Data?
+    @NSManaged public var note: String?
 }
 
 extension User : Identifiable {

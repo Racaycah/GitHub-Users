@@ -88,23 +88,9 @@ class NetworkManager {
                     
                     
                 } catch let error {
-                    if !(error is RequestError) {
-                        DispatchQueue.main.async {
-                            completion(.failure(.generic(error)))
-                        }
+                    DispatchQueue.main.async {
+                        completion(.failure(.generic(error)))
                     }
-                    
-                    switch error as! RequestError {
-                    case .objectAlreadyExists(let user):
-                        DispatchQueue.main.async {
-                            completion(.success(user as! T))
-                        }
-                    default:
-                        DispatchQueue.main.async {
-                            completion(.failure(.generic(error)))
-                        }
-                    }
-                    
                 }
             }.resume()
         }

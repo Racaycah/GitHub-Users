@@ -16,7 +16,8 @@ class UsersListViewController: BaseViewController {
     let collectionViewFlowLayout: UICollectionViewFlowLayout =  {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 80)
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 80)
+        layout.estimatedItemSize = .zero
+            //CGSize(width: UIScreen.main.bounds.width - 20, height: 80)
         layout.minimumInteritemSpacing = 10
         layout.scrollDirection = .vertical
         return layout
@@ -40,6 +41,7 @@ class UsersListViewController: BaseViewController {
         usersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         usersCollectionView.delegate = self
         usersCollectionView.dataSource = self
+        usersCollectionView.backgroundColor = .systemBackground
         
         view.addSubview(usersCollectionView)
         
@@ -61,11 +63,14 @@ class UsersListViewController: BaseViewController {
         usersViewModel.delegate = self
 //        usersViewModel.getUsers()
         usersViewModel.loadSavedUsers()
+//        usersViewModel.deleteAllUsers()
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for username or note..."
         navigationItem.searchController = searchController
+        
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     @objc
@@ -76,7 +81,7 @@ class UsersListViewController: BaseViewController {
     // MARK: - Segue Handling
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == segueIdentifier, let profileVC = segue.destination as? ProfileViewController, let data = sender as? [Any], let user = data[0] as? User, let index = data[1] as? IndexPath else { return }
+        guard segue.identifier == segueIdentifier, let profileVC = segue.destination as? ProfileViewController, let data = sender as? [Any], let user = data[0] as? UserModel, let index = data[1] as? IndexPath else { return }
         profileVC.profileViewModel = ProfileViewModel(user: user, index: index)
         profileVC.profileViewModel.editDelegate = self
     }
@@ -140,13 +145,15 @@ extension UsersListViewController: UISearchResultsUpdating {
 // MARK: - EditUserDelegate
 
 extension UsersListViewController: EditUserDelegate {
-    func noteSaved(forUser user: User, inIndex index: IndexPath) {
-        if searchController.isActive {
-            usersViewModel.filteredUsers[index.item] = user
-        } else {
-            usersViewModel.users[index.item] = user
-        }
+    func noteSaved(forUser user: UserModel, inIndex index: IndexPath) {
+        guard let filteredIndex = usersViewModel.filteredUsers.firstIndex(where: { $0.id == user.id }),
+              let normalIndex = usersViewModel.users.firstIndex(where: { $0.id == user.id }) else { return }
         
-        usersCollectionView.reloadItems(at: [index])
+        usersViewModel.filteredUsers[filteredIndex] = user
+        usersViewModel.users[normalIndex] = user
+        
+        let indexToReload = searchController.isActive ? filteredIndex : normalIndex
+        
+        usersCollectionView.reloadItems(at: [IndexPath(item: indexToReload, section: 0)])
     }
 }

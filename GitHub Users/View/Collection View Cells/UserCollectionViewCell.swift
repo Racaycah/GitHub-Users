@@ -21,12 +21,12 @@ class UserCollectionViewCell: UICollectionViewCell {
     }
 
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: AsyncImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var extraIndicatorsStackView: UIStackView!
     
-    var user: User!
+    var user: UserModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,19 +38,18 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        ImageCache.shared.cancelIfRunning(forURL: user.avatarUrl!)
-        avatarImageView.image = nil
+
         for subview in extraIndicatorsStackView.arrangedSubviews {
-            extraIndicatorsStackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
         }
     }
 
 }
 
 extension UserCollectionViewCell: BaseCell {
-    typealias model = User
+    typealias model = UserModel
     
-    func configureCell(with model: User, invertImage: Bool) {
+    func configureCell(with model: UserModel, invertImage: Bool) {
         self.user = model
         
         usernameLabel.text = model.name
@@ -59,15 +58,29 @@ extension UserCollectionViewCell: BaseCell {
             extraIndicatorsStackView.removeArrangedSubview(subview)
         }
         
-        if user.note != nil {
-            extraIndicatorsStackView.addArrangedSubview(UIImageView(image: Badge.note.image))
+        if let note = user.note, !note.isEmpty {
+            let noteImageView = UIImageView(image: Badge.note.image?.withTintColor(.label))
+            extraIndicatorsStackView.addArrangedSubview(noteImageView)
+            
+            NSLayoutConstraint.activate([
+                noteImageView.widthAnchor.constraint(equalToConstant: 32),
+                noteImageView.heightAnchor.constraint(equalToConstant: 32),
+                noteImageView.centerYAnchor.constraint(equalTo: extraIndicatorsStackView.centerYAnchor)
+            ])
         }
         
-        ImageCache.shared.fetch(from: model.avatarUrl!, completion: { [weak self] (image) in
-            guard let self = self else { return }
-            guard let image = image else { return }
-            
-            if !invertImage { self.avatarImageView.image = image } else {
+        guard let avatarUrl = URL(string: model.avatarUrl) else { return }
+        
+        if let imageData = model.image, let image = UIImage(data: imageData) {
+            avatarImageView.image = image
+            ImageCache.save(image: image, for: avatarUrl)
+            return
+        }
+        
+        if let image = ImageCache.image(for: avatarUrl) {
+            if !invertImage {
+                avatarImageView.image = image
+            } else {
                 let actualImage = CIImage(image: image)
                 if let inversionFilter = CIFilter(name: "CIColorInvert") {
                     inversionFilter.setValue(actualImage, forKey: kCIInputImageKey)
@@ -75,6 +88,8 @@ extension UserCollectionViewCell: BaseCell {
                     self.avatarImageView.image = invertedImage
                 }
             }
-        })
+        } else {
+            avatarImageView.loadImage(from: avatarUrl)
+        }
     }
 }

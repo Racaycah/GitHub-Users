@@ -18,6 +18,11 @@
 		743F715925862D0A00D3BEE2 /* GitHub_UsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F715825862D0A00D3BEE2 /* GitHub_UsersTests.swift */; };
 		743F716425862D0A00D3BEE2 /* GitHub_UsersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F716325862D0A00D3BEE2 /* GitHub_UsersUITests.swift */; };
 		743F717F25862D9200D3BEE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F717E25862D9200D3BEE2 /* NetworkManager.swift */; };
+		7441483725BC334B00AA02DE /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441483625BC334B00AA02DE /* AsyncImageView.swift */; };
+		7441484325BC4C1D00AA02DE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441484225BC4C1D00AA02DE /* CoreDataManager.swift */; };
+		7441484425BC4C1D00AA02DE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441484225BC4C1D00AA02DE /* CoreDataManager.swift */; };
+		7441485325BC5E4C00AA02DE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441485225BC5E4C00AA02DE /* UserModel.swift */; };
+		7441485425BC5E4C00AA02DE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441485225BC5E4C00AA02DE /* UserModel.swift */; };
 		74436885258E40650067C077 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74436884258E40650067C077 /* UsersViewModel.swift */; };
 		74436898258E484C0067C077 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74436896258E484C0067C077 /* UserCollectionViewCell.swift */; };
 		74436899258E484C0067C077 /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74436897258E484C0067C077 /* UserCollectionViewCell.xib */; };
@@ -74,6 +79,9 @@
 		743F716325862D0A00D3BEE2 /* GitHub_UsersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub_UsersUITests.swift; sourceTree = "<group>"; };
 		743F716525862D0A00D3BEE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		743F717E25862D9200D3BEE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7441483625BC334B00AA02DE /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		7441484225BC4C1D00AA02DE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7441485225BC5E4C00AA02DE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		74436884258E40650067C077 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		74436896258E484C0067C077 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		74436897258E484C0067C077 /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -186,6 +194,7 @@
 			children = (
 				7443689D258E4B400067C077 /* Model.swift */,
 				74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */,
+				7441485225BC5E4C00AA02DE /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +207,7 @@
 				743F714C25862D0900D3BEE2 /* LaunchScreen.storyboard */,
 				743F714425862D0700D3BEE2 /* Main.storyboard */,
 				744368A7258E4F9C0067C077 /* BaseCell.swift */,
+				7441483625BC334B00AA02DE /* AsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				744368B2258E5F3F0067C077 /* ImageCache.swift */,
+				7441484225BC4C1D00AA02DE /* CoreDataManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -384,14 +395,17 @@
 				743F714325862D0700D3BEE2 /* BaseViewController.swift in Sources */,
 				74316E252597896300E341A3 /* ProfileViewModel.swift in Sources */,
 				746BE7E8258633F300326FF8 /* UsersListViewController.swift in Sources */,
+				7441483725BC334B00AA02DE /* AsyncImageView.swift in Sources */,
 				744368A8258E4F9C0067C077 /* BaseCell.swift in Sources */,
 				74CF50DB2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
 				743F717F25862D9200D3BEE2 /* NetworkManager.swift in Sources */,
 				74CF510A25966C9900637874 /* GitHub_Users.xcdatamodeld in Sources */,
 				74316E20259769B500E341A3 /* ProfileViewController.swift in Sources */,
 				74CF50EB259654AD00637874 /* User+CoreDataClass.swift in Sources */,
+				7441485325BC5E4C00AA02DE /* UserModel.swift in Sources */,
 				744368AD258E52860067C077 /* BaseCellViewModel.swift in Sources */,
 				74CF511225966DCB00637874 /* User+CoreDataProperties.swift in Sources */,
+				7441484325BC4C1D00AA02DE /* CoreDataManager.swift in Sources */,
 				7443689E258E4B400067C077 /* Model.swift in Sources */,
 				74436885258E40650067C077 /* UsersViewModel.swift in Sources */,
 				744368A3258E4B6F0067C077 /* CollectionViewCellConfiguration.swift in Sources */,
@@ -410,6 +424,8 @@
 				743F715925862D0A00D3BEE2 /* GitHub_UsersTests.swift in Sources */,
 				74CF50DC2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
 				74CF511325966DCB00637874 /* User+CoreDataProperties.swift in Sources */,
+				7441484425BC4C1D00AA02DE /* CoreDataManager.swift in Sources */,
+				7441485425BC5E4C00AA02DE /* UserModel.swift in Sources */,
 				74CF50EC259654AD00637874 /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

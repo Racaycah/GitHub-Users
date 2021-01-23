@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dn-Hk-deE">
                         <rect key="frame" x="0.0" y="0.0" width="371" height="80"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gqi-7Z-EIW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gqi-7Z-EIW" customClass="AsyncImageView" customModule="GitHub_Users" customModuleProvider="target">
                                 <rect key="frame" x="16" y="8" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="pdD-Sf-vbU"/>
@@ -40,9 +40,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-wi-Mnr">
-                                <rect key="frame" x="198.5" y="18" width="156.5" height="44"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-wi-Mnr">
+                                <rect key="frame" x="235" y="18" width="120" height="44"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" priority="999" constant="120" id="71V-cl-e9y"/>
                                     <constraint firstAttribute="height" constant="44" id="Icm-gz-i2S"/>
                                 </constraints>
                             </stackView>
@@ -53,10 +54,10 @@
                             <constraint firstAttribute="trailing" secondItem="EGj-wi-Mnr" secondAttribute="trailing" constant="16" id="6qC-N3-kUo"/>
                             <constraint firstItem="gqi-7Z-EIW" firstAttribute="centerY" secondItem="4dn-Hk-deE" secondAttribute="centerY" id="J1V-AJ-T9O"/>
                             <constraint firstItem="LyU-4l-pNn" firstAttribute="top" secondItem="4dn-Hk-deE" secondAttribute="top" constant="16" id="MXh-vv-OZT"/>
+                            <constraint firstItem="EGj-wi-Mnr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LyU-4l-pNn" secondAttribute="trailing" constant="16" id="XOW-yX-sBn"/>
                             <constraint firstItem="gqi-7Z-EIW" firstAttribute="leading" secondItem="4dn-Hk-deE" secondAttribute="leading" constant="16" id="Xle-1G-QVe"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oNq-ZA-QAB" secondAttribute="bottom" constant="8" id="ZgD-vO-e9M"/>
                             <constraint firstItem="LyU-4l-pNn" firstAttribute="leading" secondItem="gqi-7Z-EIW" secondAttribute="trailing" constant="16" id="bdz-dQ-0ZF"/>
-                            <constraint firstItem="EGj-wi-Mnr" firstAttribute="leading" secondItem="LyU-4l-pNn" secondAttribute="trailing" constant="15" id="jwD-Aa-OZE"/>
                             <constraint firstItem="oNq-ZA-QAB" firstAttribute="trailing" secondItem="LyU-4l-pNn" secondAttribute="trailing" id="ocw-bT-XEw"/>
                             <constraint firstItem="oNq-ZA-QAB" firstAttribute="leading" secondItem="LyU-4l-pNn" secondAttribute="leading" id="pEg-4E-BMt"/>
                             <constraint firstItem="oNq-ZA-QAB" firstAttribute="top" secondItem="LyU-4l-pNn" secondAttribute="bottom" constant="8" id="x96-pq-ReG"/>
@@ -73,7 +74,7 @@
             </constraints>
             <size key="customSize" width="371" height="80"/>
             <connections>
-                <outlet property="avatarImageView" destination="gqi-7Z-EIW" id="lA4-9h-BHW"/>
+                <outlet property="avatarImageView" destination="gqi-7Z-EIW" id="HFy-fW-pxe"/>
                 <outlet property="containerView" destination="4dn-Hk-deE" id="0UM-sK-uek"/>
                 <outlet property="descriptionLabel" destination="oNq-ZA-QAB" id="Fbe-v3-mfu"/>
                 <outlet property="extraIndicatorsStackView" destination="EGj-wi-Mnr" id="KWz-nf-qEe"/>

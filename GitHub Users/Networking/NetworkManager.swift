@@ -31,6 +31,13 @@ enum RequestType {
         }
     }
     
+    fileprivate var updatesExistingObject: Bool {
+        switch self {
+        case .user: return true
+        default: return false
+        }
+    }
+    
     var url: String { return baseUrl + endpoint }
 }
 
@@ -72,19 +79,32 @@ class NetworkManager {
                 
                 do {
                     let decoder = JSONDecoder()
-                    DispatchQueue.main.sync {
-                        decoder.userInfo[CodingUserInfoKey.managedObjectContext!] = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-                    }
-                    
+                    decoder.dateDecodingStrategy = .iso8601
                     let object = try decoder.decode(T.self, from: data)
                     
                     DispatchQueue.main.async {
                         completion(.success(object))
                     }
+                    
+                    
                 } catch let error {
-                    DispatchQueue.main.async {
-                        completion(.failure(.generic(error)))
+                    if !(error is RequestError) {
+                        DispatchQueue.main.async {
+                            completion(.failure(.generic(error)))
+                        }
                     }
+                    
+                    switch error as! RequestError {
+                    case .objectAlreadyExists(let user):
+                        DispatchQueue.main.async {
+                            completion(.success(user as! T))
+                        }
+                    default:
+                        DispatchQueue.main.async {
+                            completion(.failure(.generic(error)))
+                        }
+                    }
+                    
                 }
             }.resume()
         }

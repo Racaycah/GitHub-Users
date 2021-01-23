@@ -36,7 +36,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Psv-Be-zO8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Psv-Be-zO8" customClass="AsyncImageView" customModule="GitHub_Users" customModuleProvider="target">
                                 <rect key="frame" x="10" y="98" width="394" height="148"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Psv-Be-zO8" secondAttribute="height" multiplier="16:6" id="xYq-Hg-tsV"/>
@@ -106,7 +106,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xuf-oZ-51i">
-                                <rect key="frame" x="190" y="712.5" width="34" height="30"/>
+                                <rect key="frame" x="147" y="712.5" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="av4-VT-NHv"/>
+                                </constraints>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveTapped:" destination="Vzv-Xj-Djr" eventType="touchUpInside" id="D8W-Xj-X30"/>
@@ -148,7 +151,7 @@
                         <outlet property="nameLabel" destination="jY7-jI-Fv1" id="zCc-Rr-dQF"/>
                         <outlet property="noteTextView" destination="OJI-4Q-hXS" id="Ah3-yE-22N"/>
                         <outlet property="saveButton" destination="xuf-oZ-51i" id="SaF-lL-Bwh"/>
-                        <outlet property="userAvatarImageView" destination="Psv-Be-zO8" id="JMJ-Zg-mZe"/>
+                        <outlet property="userAvatarImageView" destination="Psv-Be-zO8" id="bke-2g-sOH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1vW-OZ-ZZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

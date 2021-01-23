@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: BaseViewController {
     
-    @IBOutlet weak var userAvatarImageView: UIImageView!
+    @IBOutlet weak var userAvatarImageView: AsyncImageView!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var infoContainerView: UIView!
@@ -37,7 +37,8 @@ class ProfileViewController: BaseViewController {
         saveButton.layer.cornerRadius = 5
         saveButton.layer.borderWidth = 2
         saveButton.layer.borderColor = UIColor.systemBlue.cgColor
-        saveButton.titleLabel?.sizeToFit()
+        
+        title = profileViewModel.user.name
         
         noteTextView.delegate = self
         noteTextView.text = profileViewModel.user.note
@@ -58,12 +59,12 @@ class ProfileViewController: BaseViewController {
 }
 
 extension ProfileViewController: ProfileViewModelDelegate {
-    func userDetailsFetched(_ user: User) {
-        ImageCache.shared.fetch(from: user.avatarUrl!, completion: { [unowned self] (image) in
-            self.userAvatarImageView.image = image
-        })
+    func userDetailsFetched(_ user: UserModel) {
+        if let avatarUrl = URL(string: user.avatarUrl) {
+            userAvatarImageView.loadImage(from: avatarUrl)
+        }
         
-        NetworkManager.shared.request(.followers(user: user.name!), decodingTo: [DummyUser].self) { [unowned self] (result) in
+        NetworkManager.shared.request(.followers(user: user.name), decodingTo: [DummyUser].self) { [unowned self] (result) in
             switch result {
             case .success(let users):
                 self.followersLabel.text = "Followers: \(users.count)"
@@ -72,7 +73,7 @@ extension ProfileViewController: ProfileViewModelDelegate {
             }
         }
         
-        NetworkManager.shared.request(.following(user: user.name!), decodingTo: [DummyUser].self) { [unowned self] (result) in
+        NetworkManager.shared.request(.following(user: user.name), decodingTo: [DummyUser].self) { [unowned self] (result) in
             switch result {
             case .success(let users):
                 self.followingLabel.text = "Following: \(users.count)"

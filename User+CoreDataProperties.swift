@@ -13,7 +13,10 @@ import CoreData
 extension User {
 
     @nonobjc public class func createFetchRequest() -> NSFetchRequest<User> {
-        return NSFetchRequest<User>(entityName: "User")
+        let request = NSFetchRequest<User>(entityName: "User")
+        request.sortDescriptors = [.init(key: "id", ascending: true)]
+        
+        return request
     }
 
     @NSManaged public var avatarUrl: String?

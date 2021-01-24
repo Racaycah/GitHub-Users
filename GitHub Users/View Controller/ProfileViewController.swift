@@ -56,12 +56,16 @@ class ProfileViewController: BaseViewController {
         
         profileViewModel.saveNote(noteTextView.text)
     }
+    
+    override func networkBecameAvailable() {
+        profileViewModel.getUserDetails()
+    }
 }
 
 extension ProfileViewController: ProfileViewModelDelegate {
     func userDetailsFetched(_ user: UserModel) {
         if let avatarUrl = URL(string: user.avatarUrl) {
-            userAvatarImageView.loadImage(from: avatarUrl)
+            userAvatarImageView.loadImage(from: avatarUrl, invert: false)
         }
         
         NetworkManager.shared.request(.followers(user: user.name), decodingTo: [DummyUser].self) { [unowned self] (result) in

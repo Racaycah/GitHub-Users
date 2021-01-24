@@ -11,7 +11,7 @@ class AsyncImageView: UIImageView {
     private var imageLoadTask: URLSessionDataTask!
     private var spinner = UIActivityIndicatorView(style: .medium)
     
-    func loadImage(from url: URL) {
+    func loadImage(from url: URL, invert: Bool) {
         image = nil
         
         addSpinner()
@@ -21,7 +21,11 @@ class AsyncImageView: UIImageView {
         }
         
         if let cachedImage = ImageCache.image(for: url) {
-            image = cachedImage
+            if !invert {
+                image = cachedImage
+            } else {
+                
+            }
             removeSpinner()
             return
         }
@@ -29,6 +33,8 @@ class AsyncImageView: UIImageView {
         imageLoadTask = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
             
+            // Every url is valid and contains an image.
+            // The only way we can't get data is if the task is cancelled.
             guard let data = data, let fetchedImage = UIImage(data: data) else {
                 print("Cancelled loading image")
                 return
@@ -38,7 +44,17 @@ class AsyncImageView: UIImageView {
             CoreDataManager.shared.saveImage(fetchedImage, forUrl: url)
             
             DispatchQueue.main.async {
-                self.image = fetchedImage
+                if !invert {
+                    self.image = fetchedImage
+                } else {
+                    let actualImage = CIImage(image: fetchedImage)
+                    if let inversionFilter = CIFilter(name: "CIColorInvert") {
+                        inversionFilter.setValue(actualImage, forKey: kCIInputImageKey)
+                        let invertedImage = UIImage(ciImage: inversionFilter.outputImage!)
+                        self.image = invertedImage
+                    }
+                }
+                
                 self.removeSpinner()
             }
         }

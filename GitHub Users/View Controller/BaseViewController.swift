@@ -10,19 +10,24 @@ import Network
 
 class BaseViewController: UIViewController {
     
-    private let networkQueue = DispatchQueue(label: "github-users.network.queue")
+    private let networkQueue = DispatchQueue(label: "github-users.network.monitor.queue")
     private let networkMonitor = NWPathMonitor()
+    
+    // To check if we didn't have connection before and became online.
+    private var lastNetworkStatus: NWPath.Status = .satisfied
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         networkMonitor.pathUpdateHandler = networkStatusChanged(_:)
-        networkMonitor.start(queue: networkQueue)
+        
+        if networkMonitor.queue == nil {
+            networkMonitor.start(queue: networkQueue)
+        }
     }
     
     // MARK: - Network Status Observing
@@ -30,11 +35,21 @@ class BaseViewController: UIViewController {
     func networkStatusChanged(_ path: NWPath) {
         if path.status != .satisfied {
             DispatchQueue.main.async {
+                self.lastNetworkStatus = path.status
                 self.noNetworkAvailable()
             }
         } else {
+            if lastNetworkStatus != .satisfied {
+                print("Network became available")
+                self.networkBecameAvailable()
+            }
             
+            self.lastNetworkStatus = path.status
         }
+    }
+    
+    func networkBecameAvailable() {
+        
     }
     
     func noNetworkAvailable() {

@@ -12,6 +12,10 @@ class UserCollectionViewCell: UICollectionViewCell {
     enum Badge {
         case note
         
+        /*
+            Extension point for new indicators.
+            Add a new case to Badge and its corresponding image below
+        */
         var image: UIImage? {
             switch self {
             case .note: return UIImage(systemName: "note")
@@ -38,6 +42,8 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        avatarImageView.cancelDownload()
 
         for subview in extraIndicatorsStackView.arrangedSubviews {
             subview.removeFromSuperview()
@@ -59,7 +65,8 @@ extension UserCollectionViewCell: BaseCell {
         }
         
         if let note = user.note, !note.isEmpty {
-            let noteImageView = UIImageView(image: Badge.note.image?.withTintColor(.label))
+            let noteImageView = UIImageView(image: Badge.note.image?.withRenderingMode(.alwaysTemplate))
+            noteImageView.tintColor = .label
             extraIndicatorsStackView.addArrangedSubview(noteImageView)
             
             NSLayoutConstraint.activate([
@@ -72,7 +79,17 @@ extension UserCollectionViewCell: BaseCell {
         guard let avatarUrl = URL(string: model.avatarUrl) else { return }
         
         if let imageData = model.image, let image = UIImage(data: imageData) {
-            avatarImageView.image = image
+            if !invertImage {
+                avatarImageView.image = image
+            } else {
+                let actualImage = CIImage(image: image)
+                if let inversionFilter = CIFilter(name: "CIColorInvert") {
+                    inversionFilter.setValue(actualImage, forKey: kCIInputImageKey)
+                    let invertedImage = UIImage(ciImage: inversionFilter.outputImage!)
+                    self.avatarImageView.image = invertedImage
+                }
+            }
+            
             ImageCache.save(image: image, for: avatarUrl)
             return
         }
@@ -89,7 +106,7 @@ extension UserCollectionViewCell: BaseCell {
                 }
             }
         } else {
-            avatarImageView.loadImage(from: avatarUrl)
+            avatarImageView.loadImage(from: avatarUrl, invert: invertImage)
         }
     }
 }

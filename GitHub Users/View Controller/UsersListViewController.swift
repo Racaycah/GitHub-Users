@@ -78,6 +78,10 @@ class UsersListViewController: BaseViewController {
         usersViewModel.deleteAllUsers()
     }
     
+    override func networkBecameAvailable() {
+        usersViewModel.getUsers()
+    }
+    
     // MARK: - Segue Handling
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

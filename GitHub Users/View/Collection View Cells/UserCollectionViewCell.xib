@@ -40,7 +40,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-wi-Mnr">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-wi-Mnr">
                                 <rect key="frame" x="235" y="18" width="120" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="120" id="71V-cl-e9y"/>

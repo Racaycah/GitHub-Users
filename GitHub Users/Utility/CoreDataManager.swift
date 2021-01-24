@@ -21,13 +21,10 @@ class CoreDataManager {
             description.url = URL(fileURLWithPath: "/dev/null")
             container.persistentStoreDescriptions = [description]
             
-            
             container.loadPersistentStores { (storeDescription, error) in
                 if let error = error {
-                    print("CoreDataManager initialization error: \(error)")
+                    fatalError("CoreDataManager initialization error: \(error)")
                 }
-                
-                
             }
             
             return container
@@ -79,19 +76,32 @@ class CoreDataManager {
         let count = try? mainContext.count(for: User.createFetchRequest())
         print("Users saved before: \(count ?? 0)")
         let savingContext = newSaveContext()
+        savingContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         let batchInsertRequest = NSBatchInsertRequest(entityName: "User", objects: users.map { $0.dictionary })
+        batchInsertRequest.resultType = .objectIDs
         
         savingContext.performAndWait { [unowned self] in
             do {
                 try savingContext.execute(batchInsertRequest)
                 
+                try self.fetchResultsController.performFetch()
                 let newCount = try? self.mainContext.count(for: User.createFetchRequest())
                 print("Users saved after: \(newCount ?? 0)")
-                try self.fetchResultsController.performFetch()
+                
             } catch let error {
                 print("Error batch inserting: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func delete(_ user: UserModel) {
+        let userRequest = User.createFetchRequest()
+        userRequest.predicate = NSPredicate(format: "id == %d", user.id)
+        
+        if let foundUsers = try? mainContext.fetch(userRequest), foundUsers.count == 1 {
+            mainContext.delete(foundUsers.first!)
+            try? mainContext.save()
         }
     }
     

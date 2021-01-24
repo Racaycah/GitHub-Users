@@ -11,25 +11,34 @@ import XCTest
 
 class CoreDataTests: XCTestCase {
     
-    let user = UserModel(name: "atadoruk", avatarUrl: "https://avatars.githubusercontent.com/u/1?v=4", id: 1999, fullName: nil, company: nil, blog: nil, image: nil, note: nil)
+    static let user = UserModel(name: "atadoruk", avatarUrl: "https://avatars.githubusercontent.com/u/1?v=4", id: 1999, fullName: nil, company: nil, blog: nil, image: nil, note: nil)
     
     func testSavingUser() {
+        let previousCount = CoreDataManager.shared.fetchResultsController.fetchedObjects?.count ?? 0
+        CoreDataManager.shared.save(users: [CoreDataTests.user])
         
-        CoreDataManager.shared.save(users: [user])
+        let countAfterSaving = CoreDataManager.shared.fetchResultsController.fetchedObjects?.count ?? 0
         
-        let users = CoreDataManager.shared.fetchResultsController.fetchedObjects
-        
-        XCTAssertEqual(1, users?.count)
+        XCTAssertEqual(previousCount + 1, countAfterSaving)
+    }
+    
+    override class func tearDown() {
+        super.tearDown()
+        CoreDataManager.shared.delete(CoreDataTests.user)
     }
     
     func testUpdateUser() {
+        let note = "Core Data Testing"
+        
+        if CoreDataManager.shared.getSavedUsers().count == 0 {
+            CoreDataManager.shared.save(users: [CoreDataTests.user])
+        }
+        
+        CoreDataManager.shared.updateUser(atIndex: IndexPath(item: 0, section: 0), withNote: note)
         let user = CoreDataManager.shared.userAt(index: IndexPath(item: 0, section: 0))
         
-        let note = "Core Data Testing"
-        CoreDataManager.shared.updateUser(atIndex: IndexPath(item: 0, section: 0), withNote: note)
-        
         let noteSaved = user.note == note
-            //CoreDataManager.shared.fetchResultsController.fetchedObjects?.allSatisfy { $0.note == note }
+
         XCTAssertTrue(noteSaved)
     }
 }

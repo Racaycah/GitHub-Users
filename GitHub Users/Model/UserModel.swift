@@ -28,6 +28,17 @@ struct UserModel: Decodable, Equatable, BaseModel {
         case note
     }
     
+    init(name: String, avatarUrl: String, id: Int64, fullName: String?, company: String?, blog: String?, image: Data?, note: String?) {
+        self.name = name
+        self.avatarUrl = avatarUrl
+        self.id = id
+        self.fullName = fullName
+        self.company = company
+        self.blog = blog
+        self.image = image
+        self.note = note
+    }
+    
     init(managedObject: User) {
         name = managedObject.name!
         avatarUrl = managedObject.avatarUrl!

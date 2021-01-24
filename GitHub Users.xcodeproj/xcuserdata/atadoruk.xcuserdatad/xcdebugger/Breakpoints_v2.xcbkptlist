@@ -33,8 +33,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
             endingLineNumber = "98"
-            landmarkName = "UsersListViewController"
-            landmarkType = "21">
+            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -48,6 +48,70 @@
             breakpointStackSelectionBehavior = "1"
             scope = "1"
             stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C09E1E5-3E57-4907-AF4C-D6E6114CE82A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHub Users/View Controller/UsersListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "networkBecameAvailable()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3C09E1E5-3E57-4907-AF4C-D6E6114CE82A - 34e4f9e51ef061ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GitHub_Users.UsersListViewController.networkBecameAvailable() -&gt; ()"
+                  moduleName = "GitHub Users"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atadoruk/Desktop/Swift%20Demo%20Projects/GitHub%20Users/GitHub%20Users/View%20Controller/UsersListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "22">
+               </Location>
+               <Location
+                  uuid = "3C09E1E5-3E57-4907-AF4C-D6E6114CE82A - 3d91ab738005a926"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GitHub_UsersTests.UsersListViewController.networkBecameAvailable() -&gt; ()"
+                  moduleName = "GitHub UsersTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/atadoruk/Desktop/Swift%20Demo%20Projects/GitHub%20Users/GitHub%20Users/View%20Controller/UsersListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26D02774-6FF2-4D84-99B1-525AC80D2BFA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHub UsersTests/CoreDataTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "testUpdateUser()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

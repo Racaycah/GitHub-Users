@@ -9,25 +9,52 @@ import XCTest
 @testable import GitHub_Users
 
 class GitHub_UsersTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    let networkManager = NetworkManager.shared
+    
+    func testUserListFetch() {
+        let expectation = self.expectation(description: "User Fetching")
+        var users = [UserModel]()
+        
+        networkManager.request(.users(page: 0), decodingTo: [UserModel].self) { (result) in
+            switch result {
+            case .success(let fetchedUsers):
+                users = fetchedUsers
+                // Every batch returns 30 users
+                if fetchedUsers.count == 30 {
+                    expectation.fulfill()
+                }
+            case .failure(_):
+                break
+            }
         }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        XCTAssertEqual(30, users.count)
     }
+    
+    func testUserDetailsFetch() {
+        let username = "mojombo"
+        var userDetails: UserModel?
+        
+        let expectation = self.expectation(description: "mojombo User Details")
+        
+        networkManager.request(.user(username: username), decodingTo: UserModel.self) { (result) in
+            switch result {
+            case .success(let details):
+                userDetails = details
+                expectation.fulfill()
+            case .failure:
+                break
+            }
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        XCTAssertNotNil(userDetails)
+    }
+    
+    
 
 }

@@ -10,14 +10,33 @@ import CoreData
 
 class CoreDataManager {
     private static var persistentContainer: NSPersistentContainer = {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
         
         return appDelegate.persistentContainer
+        } else {
+            /* https://www.donnywals.com/setting-up-a-core-data-store-for-unit-tests/ */
+            let container = NSPersistentContainer(name: "GitHub_Users")
+            
+            let description = NSPersistentStoreDescription()
+            description.url = URL(fileURLWithPath: "/dev/null")
+            container.persistentStoreDescriptions = [description]
+            
+            
+            container.loadPersistentStores { (storeDescription, error) in
+                if let error = error {
+                    print("CoreDataManager initialization error: \(error)")
+                }
+                
+                
+            }
+            
+            return container
+        }
     }()
     
     private var mainContext: NSManagedObjectContext = {
         let managedContext = persistentContainer.viewContext
-        
+            
         return managedContext
     }()
     
@@ -40,7 +59,7 @@ class CoreDataManager {
         }
     }
     
-    let fetchResultsController: NSFetchedResultsController<User>!
+    var fetchResultsController: NSFetchedResultsController<User>!
     
     func getSavedUsers() -> [UserModel] {
         if let savedUsers = fetchResultsController.fetchedObjects {
@@ -76,15 +95,18 @@ class CoreDataManager {
         }
     }
     
-    func updateUser(atIndex index: IndexPath, withNote note: String) {
+    @discardableResult
+    func updateUser(atIndex index: IndexPath, withNote note: String) -> User? {
         let user = fetchResultsController.object(at: index)
         user.setValue(note, forKey: "note")
         
         do {
             try mainContext.save()
             print("Saved note for user:\n\(user)")
+            return user
         } catch let error {
             print("Couldn't save note for user: \(user)\n\(error.localizedDescription)")
+            return nil
         }
     }
     

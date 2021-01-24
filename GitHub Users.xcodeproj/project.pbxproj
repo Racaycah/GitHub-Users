@@ -9,6 +9,29 @@
 /* Begin PBXBuildFile section */
 		74316E20259769B500E341A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E1F259769B500E341A3 /* ProfileViewController.swift */; };
 		74316E252597896300E341A3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E242597896300E341A3 /* ProfileViewModel.swift */; };
+		74396F6B25BDBB270068A1C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F713E25862D0700D3BEE2 /* AppDelegate.swift */; };
+		74396F6F25BDBB390068A1C0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368B2258E5F3F0067C077 /* ImageCache.swift */; };
+		74396F7325BDBB3C0068A1C0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714225862D0700D3BEE2 /* BaseViewController.swift */; };
+		74396F7725BDBB3E0068A1C0 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746BE7E7258633F300326FF8 /* UsersListViewController.swift */; };
+		74396F7B25BDBB410068A1C0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E1F259769B500E341A3 /* ProfileViewController.swift */; };
+		74396F7F25BDBB450068A1C0 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74436884258E40650067C077 /* UsersViewModel.swift */; };
+		74396F8025BDBB450068A1C0 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74316E242597896300E341A3 /* ProfileViewModel.swift */; };
+		74396F8125BDBB450068A1C0 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368AC258E52860067C077 /* BaseCellViewModel.swift */; };
+		74396F8525BDBB490068A1C0 /* CollectionViewCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368A2258E4B6F0067C077 /* CollectionViewCellConfiguration.swift */; };
+		74396F8625BDBB490068A1C0 /* LoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744368B8258E8C0C0067C077 /* LoadingCollectionViewCell.xib */; };
+		74396F8725BDBB490068A1C0 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74436896258E484C0067C077 /* UserCollectionViewCell.swift */; };
+		74396F8825BDBB490068A1C0 /* UserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74436897258E484C0067C077 /* UserCollectionViewCell.xib */; };
+		74396F8925BDBB490068A1C0 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368B7258E8C0C0067C077 /* LoadingCollectionViewCell.swift */; };
+		74396F8D25BDBB550068A1C0 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368A7258E4F9C0067C077 /* BaseCell.swift */; };
+		74396F9125BDBB580068A1C0 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441483625BC334B00AA02DE /* AsyncImageView.swift */; };
+		74396F9525BDBB600068A1C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 743F714425862D0700D3BEE2 /* Main.storyboard */; };
+		74396F9925BDBB640068A1C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 743F714C25862D0900D3BEE2 /* LaunchScreen.storyboard */; };
+		74396F9D25BDBB6A0068A1C0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7443689D258E4B400067C077 /* Model.swift */; };
+		74396FA125BDBB6D0068A1C0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F717E25862D9200D3BEE2 /* NetworkManager.swift */; };
+		74396FA525BDBB710068A1C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714025862D0700D3BEE2 /* SceneDelegate.swift */; };
+		74396FA925BDBB740068A1C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743F714A25862D0900D3BEE2 /* Assets.xcassets */; };
+		74396FAD25BDC34C0068A1C0 /* GitHub_Users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 743F714725862D0700D3BEE2 /* GitHub_Users.xcdatamodeld */; };
+		74396FB225BDC5EF0068A1C0 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74396FB125BDC5EE0068A1C0 /* CoreDataTests.swift */; };
 		743F713F25862D0700D3BEE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F713E25862D0700D3BEE2 /* AppDelegate.swift */; };
 		743F714125862D0700D3BEE2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714025862D0700D3BEE2 /* SceneDelegate.swift */; };
 		743F714325862D0700D3BEE2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743F714225862D0700D3BEE2 /* BaseViewController.swift */; };
@@ -34,8 +57,6 @@
 		744368B9258E8C0C0067C077 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744368B7258E8C0C0067C077 /* LoadingCollectionViewCell.swift */; };
 		744368BA258E8C0C0067C077 /* LoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744368B8258E8C0C0067C077 /* LoadingCollectionViewCell.xib */; };
 		746BE7E8258633F300326FF8 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746BE7E7258633F300326FF8 /* UsersListViewController.swift */; };
-		74CF50DB2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */; };
-		74CF50DC2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */; };
 		74CF50EB259654AD00637874 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50E9259654AD00637874 /* User+CoreDataClass.swift */; };
 		74CF50EC259654AD00637874 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF50E9259654AD00637874 /* User+CoreDataClass.swift */; };
 		74CF510A25966C9900637874 /* GitHub_Users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 743F714725862D0700D3BEE2 /* GitHub_Users.xcdatamodeld */; };
@@ -63,6 +84,7 @@
 /* Begin PBXFileReference section */
 		74316E1F259769B500E341A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		74316E242597896300E341A3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		74396FB125BDC5EE0068A1C0 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		743F713B25862D0700D3BEE2 /* GitHub Users.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Users.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		743F713E25862D0700D3BEE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		743F714025862D0700D3BEE2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +115,6 @@
 		744368B7258E8C0C0067C077 /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		744368B8258E8C0C0067C077 /* LoadingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCollectionViewCell.xib; sourceTree = "<group>"; };
 		746BE7E7258633F300326FF8 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
-		74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+ManagedObjectContext.swift"; sourceTree = "<group>"; };
 		74CF50E9259654AD00637874 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "GitHub Users/Model/User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		74CF510F25966DCB00637874 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +187,7 @@
 		743F715725862D0A00D3BEE2 /* GitHub UsersTests */ = {
 			isa = PBXGroup;
 			children = (
+				74396FB125BDC5EE0068A1C0 /* CoreDataTests.swift */,
 				743F715825862D0A00D3BEE2 /* GitHub_UsersTests.swift */,
 				743F715A25862D0A00D3BEE2 /* Info.plist */,
 			);
@@ -193,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				7443689D258E4B400067C077 /* Model.swift */,
-				74CF50DA2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift */,
 				7441485225BC5E4C00AA02DE /* UserModel.swift */,
 			);
 			path = Model;
@@ -375,6 +396,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74396F9525BDBB600068A1C0 /* Main.storyboard in Resources */,
+				74396F9925BDBB640068A1C0 /* LaunchScreen.storyboard in Resources */,
+				74396F8625BDBB490068A1C0 /* LoadingCollectionViewCell.xib in Resources */,
+				74396F8825BDBB490068A1C0 /* UserCollectionViewCell.xib in Resources */,
+				74396FA925BDBB740068A1C0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +423,6 @@
 				746BE7E8258633F300326FF8 /* UsersListViewController.swift in Sources */,
 				7441483725BC334B00AA02DE /* AsyncImageView.swift in Sources */,
 				744368A8258E4F9C0067C077 /* BaseCell.swift in Sources */,
-				74CF50DB2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
 				743F717F25862D9200D3BEE2 /* NetworkManager.swift in Sources */,
 				74CF510A25966C9900637874 /* GitHub_Users.xcdatamodeld in Sources */,
 				74316E20259769B500E341A3 /* ProfileViewController.swift in Sources */,
@@ -422,9 +447,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				743F715925862D0A00D3BEE2 /* GitHub_UsersTests.swift in Sources */,
-				74CF50DC2596526D00637874 /* JSONDecoder+ManagedObjectContext.swift in Sources */,
+				74396F7F25BDBB450068A1C0 /* UsersViewModel.swift in Sources */,
+				74396FA125BDBB6D0068A1C0 /* NetworkManager.swift in Sources */,
+				74396F6F25BDBB390068A1C0 /* ImageCache.swift in Sources */,
+				74396F8D25BDBB550068A1C0 /* BaseCell.swift in Sources */,
 				74CF511325966DCB00637874 /* User+CoreDataProperties.swift in Sources */,
+				74396FA525BDBB710068A1C0 /* SceneDelegate.swift in Sources */,
+				74396F8525BDBB490068A1C0 /* CollectionViewCellConfiguration.swift in Sources */,
 				7441484425BC4C1D00AA02DE /* CoreDataManager.swift in Sources */,
+				74396F7325BDBB3C0068A1C0 /* BaseViewController.swift in Sources */,
+				74396F7B25BDBB410068A1C0 /* ProfileViewController.swift in Sources */,
+				74396F6B25BDBB270068A1C0 /* AppDelegate.swift in Sources */,
+				74396FAD25BDC34C0068A1C0 /* GitHub_Users.xcdatamodeld in Sources */,
+				74396F8925BDBB490068A1C0 /* LoadingCollectionViewCell.swift in Sources */,
+				74396F8125BDBB450068A1C0 /* BaseCellViewModel.swift in Sources */,
+				74396F7725BDBB3E0068A1C0 /* UsersListViewController.swift in Sources */,
+				74396F8025BDBB450068A1C0 /* ProfileViewModel.swift in Sources */,
+				74396F9D25BDBB6A0068A1C0 /* Model.swift in Sources */,
+				74396F9125BDBB580068A1C0 /* AsyncImageView.swift in Sources */,
+				74396FB225BDC5EF0068A1C0 /* CoreDataTests.swift in Sources */,
+				74396F8725BDBB490068A1C0 /* UserCollectionViewCell.swift in Sources */,
 				7441485425BC5E4C00AA02DE /* UserModel.swift in Sources */,
 				74CF50EC259654AD00637874 /* User+CoreDataClass.swift in Sources */,
 			);
